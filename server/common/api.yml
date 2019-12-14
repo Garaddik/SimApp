@@ -1,0 +1,64 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: SimApp
+  description: Sim Crud operations and database operation
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+  - name: Employees
+    description:  Crud operation
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  ExampleBody:
+    type: object
+    title: example
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: no_stress
+
+  Employee:
+    type: object
+    title: Employee
+    required:
+    - name
+    properties:
+      id:
+        type: number
+        example:  123  
+      name:
+        type: string
+        example:  Kiran
+
+paths:
+  /employees:
+    post:
+      tags:
+        - Employees
+      description:  Create Employee
+      response:
+        200:
+          description:  New employee created successfully
+        404:
+          description:  API Not found
+        400:
+          description:  API Bad request
+      parameters:
+      - name: employee
+        in: body
+        description:  Employee Body
+        required: true
+        schema:
+          $ref: "#/definitions/Employee"
